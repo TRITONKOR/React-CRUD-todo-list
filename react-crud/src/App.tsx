@@ -45,7 +45,10 @@ function App() {
             const response = await fetch(`http://localhost:5000/todos/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ completed: !todo.completed }),
+                body: JSON.stringify({
+                    completed: !todo.completed,
+                    title: todo.title,
+                }),
             });
             const updatedTodo = await response.json();
 
@@ -98,7 +101,7 @@ function App() {
                     todo.id === updatedTodo.id ? updatedTodo : todo
                 )
             );
-            setEditingId(null); // Exit edit mode
+            setEditingId(null);
             setEditTitle("");
         } catch (error) {
             console.error("Failed to save edited todo:", error);
